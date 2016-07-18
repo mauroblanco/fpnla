@@ -189,7 +189,7 @@ class (Vector v e, Matrix m e) => MatrixVector m v e where
     toCols_vm m = map (`col_vm` m) [0 .. cantCols_m m - 1]
 
 
-instance (Vector v e, Matrix m e) => MatrixVector m v e
+instance {-# OVERLAPPABLE #-} (Vector v e, Matrix m e) => MatrixVector m v e
 
 -- | Returns the number of rows of the matrix.
 cantRows_m :: (Matrix m e) => m e -> Int

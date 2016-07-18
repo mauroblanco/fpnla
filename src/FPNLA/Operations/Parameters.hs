@@ -38,7 +38,7 @@ module FPNLA.Operations.Parameters(
     
 ) where
 
-import FPNLA.Matrix(MatrixVector(..), Vector(..), Matrix(..))
+import FPNLA.Matrix(Matrix(..))
 import Data.Complex (Complex, conjugate)
 import Data.Tuple (swap)
 
@@ -71,17 +71,17 @@ data ResS s e = ResS { unResS :: e } deriving (Show)
 
 
 -- | Wrap a matrix into a 'ResM'.
-blasResultM :: (MatrixVector m v e) => m e -> ResM s v m e
+blasResultM :: m e -> ResM s v m e
 blasResultM = ResM
 -- | Unwrap a matrix from a 'ResM'.
-getResultDataM :: (MatrixVector m v e) => ResM s v m e -> m e
+getResultDataM :: ResM s v m e -> m e
 getResultDataM = unResM
 
 -- | Wrap a vector into a 'ResV'.
-blasResultV :: (Vector v e) => v e -> ResV s v e
+blasResultV :: v e -> ResV s v e
 blasResultV = ResV
 -- | Unwrap a vector from a 'ResV'.
-getResultDataV :: (Vector v e) => ResV s v e -> v e
+getResultDataV :: ResV s v e -> v e
 getResultDataV = unResV
 
 -- | Wrap a scalar into a 'ResS'.
@@ -135,7 +135,7 @@ dimTrans_m (Trans m) = swap $ dim_m m
 
 
 -- | Given an /i,j/ position and a TransType flagged matrix, returns the element in that position only accessing the part indicated by the TransType.
-elemSymm :: (Elt e, Matrix m e) => Int -> Int -> TriangType (m e) -> e
+elemSymm :: (Matrix m e) => Int -> Int -> TriangType (m e) -> e
 elemSymm i j (Upper m)
     | i > j = elem_m j i m
     | otherwise = elem_m i j m

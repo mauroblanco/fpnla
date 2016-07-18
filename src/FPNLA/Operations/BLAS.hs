@@ -15,7 +15,8 @@ module FPNLA.Operations.BLAS (
     -- | Matrix-Matrix operations
     SYRK(..),
     GEMM(..),
-    TRSM(..)
+    TRSM(..),
+    Elt()
 
 ) where
 
@@ -37,7 +38,7 @@ class (Elt e, MatrixVector m v e) => GEMV s m v e where
         -> TransType (m e) -- ^ A matrix /A/
         -> v e -- ^ A vector /x/
         -> e -- ^ A scalar /alpha/
-        -> e -- ^ A scalar /beta/ 
+        -> e -- ^ A scalar /beta/
         -> v e  -- ^ A vecor /y/
         -> ResV s v e -- ^ @alpha * A * x + beta * y@
 
@@ -46,7 +47,7 @@ class (Elt e, MatrixVector m v e) => SYRK s m v e where
     syrk :: StratCtx s -- ^ The context of the operation
         -> e -- ^ A scalar /alpha/
         -> TransType (m e) -- ^ A matrix /A/
-        -> e -- ^ A scalar /beta/ 
+        -> e -- ^ A scalar /beta/
         -> TriangType (m e) -- ^ A triangular matrix /C/
         -> ResM s v m e -- ^ @alpha * A * A' + beta * C@ where @A'@ is the conjugate transposed of /A/.
 
@@ -56,7 +57,7 @@ class (Elt e, MatrixVector m v e) => GEMM s m v e where
         -> TransType (m e) -- ^ A matrix /A/
         -> TransType (m e) -- ^ A matrix /B/
         -> e -- ^ A scalar /alpha/
-        -> e -- ^ A scalar /beta/ 
+        -> e -- ^ A scalar /beta/
         -> m e -- ^ A matrix /C/
         -> ResM s v m e -- ^ @alpha * A * B + beta * C@
 
