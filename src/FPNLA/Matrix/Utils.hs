@@ -3,7 +3,7 @@ module FPNLA.Matrix.Utils where
 
 
 import FPNLA.Matrix (Matrix(..))
-
+import Debug.Trace  (trace)
 
 -- | Prints a matrix to the standard output.
 -- This operation requires the elements of the matrix to have an instance of 'Show' but does not requires a 'Show' instance for the matrix data type.
@@ -13,3 +13,4 @@ print_m mi = for 0 0
           for i j | i >= m = return ()
                   | j < n = (putStr . show $ elem_m i j mi) >> putStr " " >> for i (j+1)
                   | j >= n = putStrLn "" >> for (i+1) 0
+                  | otherwise = trace "print_m" undefined
