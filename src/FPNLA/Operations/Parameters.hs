@@ -5,8 +5,6 @@ module FPNLA.Operations.Parameters(
     Elt(..),
     -- * Strategies and contexts
     StratCtx(),
-    NullContext,
-    newNullContext,
 
     -- * Result type
     -- | In BLAS it's common that operations in higher levels use operations in the lower levels, so, an operation in level three that by its signature manipulates matrices only, internally uses level two operations that manipulates vectors. In order to avoid the /show . read/ problem, the type of the vector (or any other internal data type) must appear in the signature of an operation.
@@ -62,10 +60,6 @@ instance (RealFloat e) => Elt (Complex e) where
 -- With this context we allows to pass any additional information that the operation needs to execute as parameters, but maintaining a common signature.
 -- The /s/ type parameter is the strategy so, there must exist a Haskell data type to represent a particular strategy.
 type family StratCtx s :: *
-
-data NullContext = NullContext deriving (Show)
-newNullContext :: NullContext
-newNullContext = NullContext
 
 -- | The 'ResM' data type is used as result of level three BLAS operations and returns a matrix /m/ of elements /e/ and contains the strategy /s/ and vector /v/ as phantom types.
 data ResM s (v :: * -> *) m e = ResM { unResM :: m e } deriving (Show)
