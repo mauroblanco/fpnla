@@ -27,7 +27,7 @@ class Monad mon => Vector mon v e where
 
     slice_v :: Int -> Int -> v e -> mon (v e)
 
-    update_v :: (Int -> mon e) -> v e -> mon(v e)
+    update_v :: (Int -> mon e) -> v e -> mon (v e)
 
     -- Default implementations:
 
