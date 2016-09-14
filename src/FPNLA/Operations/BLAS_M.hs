@@ -9,8 +9,8 @@ module FPNLA.Operations.BLAS_M (
 ) where
 
 import FPNLA.Matrix_M                (Matrix(), Vector())
-import FPNLA.Operations.Parameters (Elt (), ResM (),
-                                    StratCtx (), TransType ())
+import FPNLA.Operations.Parameters   (Elt (), ResM (),
+                                     StratCtx (), TransType ())
 
 
 class (Elt e, Matrix mon m e, Vector mon v e, Monad mon) => GEMM_M mon s m v e where
